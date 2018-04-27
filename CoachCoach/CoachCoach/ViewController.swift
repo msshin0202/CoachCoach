@@ -26,6 +26,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var playerNameListTableView: UITableView!
     
     var playerArray = [String]()
+//    var rowSelected : Int = 0
+//    var iPath : IndexPath = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK - TableView DataSource Methods
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return playerArray.count
     }
@@ -50,33 +59,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         return cell
     }
+    
+    //MARK - TableView Delegate Methods
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        rowSelected = indexPath.row
+//        iPath = indexPath
+//    }
+    
+    //MARK - Add/Delete Button Functionality
     
     @IBAction func addPlayerButtonPressed(_ sender: Any) {
+        
+        var textField = UITextField()
+        
         let alert = UIAlertController(title: "New Player", message: "Enter in the name of your player", preferredStyle: .alert)
         
-        alert.addTextField(configurationHandler: nil)
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
-            let newPlayerName = alert.textFields?[0].text
-            self.playerArray.append(newPlayerName!)
-//            self.playerNameListTableView.beginUpdates()
-//            self.playerNameListTableView.endUpdates()
-            return
-        }))
+        let addAction = UIAlertAction(title: "Add", style: .default) { (okAction) in
+            self.playerArray.append(textField.text!)
+            self.playerNameListTableView.reloadData()
+        }
         
-        self.present(alert, animated: true, completion: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
+        alert.addTextField { (playerNameTextField) in
+            playerNameTextField.placeholder = "John Smith"
+            textField = playerNameTextField
+        }
         
-        
+        present(alert, animated: true, completion: nil)
     }
     
     
     @IBAction func deletePlayerButtonPressed(_ sender: Any) {
+        
+        
+//        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete player?", preferredStyle: .alert)
+//
+//        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (okAction) in
+//            self.playerNameListTableView.deleteRows(at: [self.iPath], with: UITableViewRowAnimation.automatic)
+//            self.playerArray.remove(at: self.rowSelected)
+//            self.playerNameListTableView.reloadData()
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//
+//        alert.addAction(deleteAction)
+//        alert.addAction(cancelAction)
+//
+//        present(alert, animated: true, completion: nil)
     }
     
     
