@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var teamNameLabel: UILabel!
     @IBOutlet weak var goalKeeperNameLabel: UILabel!
@@ -23,14 +23,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var player9NameLabel: UILabel!
     @IBOutlet weak var player10NameLabel: UILabel!
     
+    @IBOutlet weak var goalKeeperView: UIView!
+    
     @IBOutlet weak var playerNameListTableView: UITableView!
     
-    var playerArray = [String]()
-//    var rowSelected : Int = 0
-//    var iPath : IndexPath = []
+    var playerArray = [Player]()
+    
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Players.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadPlayers()
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         // load CoachCoach logo here
@@ -38,7 +43,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // delegate table view to self here
         playerNameListTableView.delegate = self
         playerNameListTableView.dataSource = self
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        tap.delegate = self
         
+        // tap gesture recognizers
+        goalKeeperView.addGestureRecognizer(tap)
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -55,17 +65,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerNameCell", for: indexPath)
         
-        cell.textLabel?.text = playerArray[indexPath.row]
+        cell.textLabel?.text = playerArray[indexPath.row].playerName
         
         return cell
     }
     
     //MARK - TableView Delegate Methods
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        rowSelected = indexPath.row
-//        iPath = indexPath
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
+    }
     
     //MARK - Add/Delete Button Functionality
     
@@ -75,9 +86,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let alert = UIAlertController(title: "New Player", message: "Enter in the name of your player", preferredStyle: .alert)
         
+        
         let addAction = UIAlertAction(title: "Add", style: .default) { (okAction) in
-            self.playerArray.append(textField.text!)
+            
+            let newPlayer = Player()
+            newPlayer.playerName = textField.text!
+            
+            self.playerArray.append(newPlayer)
             self.playerNameListTableView.reloadData()
+            
+            self.savePlayers()
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -96,20 +114,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func deletePlayerButtonPressed(_ sender: Any) {
         
         
-//        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete player?", preferredStyle: .alert)
-//
-//        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (okAction) in
-//            self.playerNameListTableView.deleteRows(at: [self.iPath], with: UITableViewRowAnimation.automatic)
-//            self.playerArray.remove(at: self.rowSelected)
-//            self.playerNameListTableView.reloadData()
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        alert.addAction(deleteAction)
-//        alert.addAction(cancelAction)
-//
-//        present(alert, animated: true, completion: nil)
+    }
+    
+    //MARK - Model Manipulation Methods
+    
+    func savePlayers(){
+        let encoder = PropertyListEncoder()
+        
+        do {
+            let data = try encoder.encode(playerArray)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print("Error encoding Player Array: \(error)")
+            
+        }
+        
+    }
+    
+    func loadPlayers(){
+        
+        let decoder = PropertyListDecoder()
+        
+        do {
+            let data = try Data(contentsOf: dataFilePath!)
+            playerArray = try decoder.decode([Player].self, from: data)
+        } catch {
+            print("Error decoding Player Array: \(error)")
+        }
+    
+        
+    }
+    
+    @objc func tap(_ gestureRecognizer: UITapGestureRecognizer) {
+        goalKeeperView.alpha = 0.5
     }
     
     

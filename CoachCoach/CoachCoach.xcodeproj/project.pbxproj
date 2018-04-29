@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC19077120967E0E007C979E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC19077020967E0E007C979E /* Player.swift */; };
 		CCB922ED2073EE4200B1AF74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB922EC2073EE4200B1AF74 /* AppDelegate.swift */; };
 		CCB922EF2073EE4200B1AF74 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB922EE2073EE4200B1AF74 /* ViewController.swift */; };
 		CCB922F22073EE4200B1AF74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCB922F02073EE4200B1AF74 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC19077020967E0E007C979E /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CCB922E92073EE4200B1AF74 /* CoachCoach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoachCoach.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB922EC2073EE4200B1AF74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCB922EE2073EE4200B1AF74 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CC19076D20967DBF007C979E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CCB922EE2073EE4200B1AF74 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CC19076E20967DD9007C979E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CCB922F02073EE4200B1AF74 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CC19076F20967DEE007C979E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CCB922F32073EE4300B1AF74 /* Assets.xcassets */,
+				CCB922F52073EE4300B1AF74 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CC19077220967E13007C979E /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				CC19077020967E0E007C979E /* Player.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
 		CCB922E02073EE4200B1AF74 = {
 			isa = PBXGroup;
 			children = (
@@ -98,11 +133,11 @@
 			isa = PBXGroup;
 			children = (
 				CCB922EC2073EE4200B1AF74 /* AppDelegate.swift */,
-				CCB922EE2073EE4200B1AF74 /* ViewController.swift */,
-				CCB922F02073EE4200B1AF74 /* Main.storyboard */,
-				CCB922F32073EE4300B1AF74 /* Assets.xcassets */,
-				CCB922F52073EE4300B1AF74 /* LaunchScreen.storyboard */,
+				CC19076D20967DBF007C979E /* Controllers */,
+				CC19076E20967DD9007C979E /* Views */,
+				CC19076F20967DEE007C979E /* Supporting Files */,
 				CCB922F82073EE4300B1AF74 /* Info.plist */,
+				CC19077220967E13007C979E /* Data Model */,
 			);
 			path = CoachCoach;
 			sourceTree = "<group>";
@@ -257,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCB922EF2073EE4200B1AF74 /* ViewController.swift in Sources */,
+				CC19077120967E0E007C979E /* Player.swift in Sources */,
 				CCB922ED2073EE4200B1AF74 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
