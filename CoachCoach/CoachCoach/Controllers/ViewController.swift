@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
@@ -24,17 +25,29 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var player10NameLabel: UILabel!
     
     @IBOutlet weak var goalKeeperView: UIView!
+    @IBOutlet weak var player1View: UIView!
+    @IBOutlet weak var player2View: UIView!
+    @IBOutlet weak var player3View: UIView!
+    @IBOutlet weak var player4View: UIView!
+    @IBOutlet weak var player5View: UIView!
+    @IBOutlet weak var player6View: UIView!
+    @IBOutlet weak var player7View: UIView!
+    @IBOutlet weak var player8View: UIView!
+    @IBOutlet weak var player9View: UIView!
+    @IBOutlet weak var player10View: UIView!
     
     @IBOutlet weak var playerNameListTableView: UITableView!
     
+    var selectedPlayer : String = ""
+    
     var playerArray = [Player]()
     
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Players.plist")
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+//    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Players.plist")
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadPlayers()
         
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -43,12 +56,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // delegate table view to self here
         playerNameListTableView.delegate = self
         playerNameListTableView.dataSource = self
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
-        tap.delegate = self
         
-        // tap gesture recognizers
-        goalKeeperView.addGestureRecognizer(tap)
+        addTap(viewToAddTapRecognizerTo: goalKeeperView)
+        addTap(viewToAddTapRecognizerTo: player1View)
+        addTap(viewToAddTapRecognizerTo: player2View)
+        addTap(viewToAddTapRecognizerTo: player3View)
+        addTap(viewToAddTapRecognizerTo: player4View)
+        addTap(viewToAddTapRecognizerTo: player5View)
+        addTap(viewToAddTapRecognizerTo: player6View)
+        addTap(viewToAddTapRecognizerTo: player7View)
+        addTap(viewToAddTapRecognizerTo: player8View)
+        addTap(viewToAddTapRecognizerTo: player9View)
+        
+        loadPlayers()
+        teamName()
 
+    }
+    
+    func teamName(){
+        if (teamNameLabel.text == ""){
+            var textField = UITextField()
+            
+            let alert = UIAlertController(title: "Team Name", message: "Enter in the name of your team", preferredStyle: .alert)
+            
+            
+            let okAction = UIAlertAction(title: "Ok", style: .default) { (okAction) in
+                
+                self.teamNameLabel.text = textField.text!
+                
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(okAction)
+            alert.addAction(cancelAction)
+            alert.addTextField { (teamNameinTextField) in
+                teamNameinTextField.placeholder = "Team Name"
+                textField = teamNameinTextField
+            }
+            
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func addTap (viewToAddTapRecognizerTo : UIView) {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:playerNameLabel:)))
+        tap.delegate = self
+        viewToAddTapRecognizerTo.addGestureRecognizer(tap)
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,11 +124,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    
     //MARK - TableView Delegate Methods
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        
+        let cell = tableView.cellForRow(at: indexPath)
+        selectedPlayer = (cell?.textLabel!.text!)!
         
     }
     
@@ -89,11 +145,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let addAction = UIAlertAction(title: "Add", style: .default) { (okAction) in
             
-            let newPlayer = Player()
+            let newPlayer = Player(context: self.context)
             newPlayer.playerName = textField.text!
             
             self.playerArray.append(newPlayer)
-            self.playerNameListTableView.reloadData()
             
             self.savePlayers()
         }
@@ -119,34 +174,32 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //MARK - Model Manipulation Methods
     
     func savePlayers(){
-        let encoder = PropertyListEncoder()
         
         do {
-            let data = try encoder.encode(playerArray)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
-            print("Error encoding Player Array: \(error)")
+            print("Error saving context: \(error)")
             
         }
         
+        playerNameListTableView.reloadData()
+        
     }
     
-    func loadPlayers(){
-        
-        let decoder = PropertyListDecoder()
+    func loadPlayers(with request : NSFetchRequest<Player> = Player.fetchRequest()){
         
         do {
-            let data = try Data(contentsOf: dataFilePath!)
-            playerArray = try decoder.decode([Player].self, from: data)
+            playerArray = try context.fetch(request)
         } catch {
-            print("Error decoding Player Array: \(error)")
+            print("Error fetching data from context: \(error)")
         }
     
         
     }
     
-    @objc func tap(_ gestureRecognizer: UITapGestureRecognizer) {
-        goalKeeperView.alpha = 0.5
+    @objc func tap(_ gestureRecognizer: UITapGestureRecognizer, playerNameLabel : UILabel) {
+        print("what gets printed here?")
+        print("here")
     }
     
     
