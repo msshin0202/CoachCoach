@@ -44,6 +44,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    
+    
+    
 //    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Players.plist")
     
     override func viewDidLoad() {
@@ -68,13 +71,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         addTap(viewToAddTapRecognizerTo: player8View)
         addTap(viewToAddTapRecognizerTo: player9View)
         
+        print(teamNameLabel.text!)
         loadPlayers()
         teamName()
 
     }
     
     func teamName(){
-        if (teamNameLabel.text == ""){
+        if (teamNameLabel.text == "My Team"){
             var textField = UITextField()
             
             let alert = UIAlertController(title: "Team Name", message: "Enter in the name of your team", preferredStyle: .alert)
@@ -132,6 +136,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.cellForRow(at: indexPath)
         selectedPlayer = (cell?.textLabel!.text!)!
         
+        
+        
     }
     
     //MARK - Add/Delete Button Functionality
@@ -169,6 +175,31 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func deletePlayerButtonPressed(_ sender: Any) {
         
         
+        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete \(selectedPlayer) from your team?" , preferredStyle: .alert)
+        
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
+            
+            for player in 0...self.playerArray.count-1 {
+                if (self.playerArray[player].playerName! == self.selectedPlayer){
+                    self.playerArray.remove(at: player)
+                    self.savePlayers()                    
+                    return
+                }
+            }
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    
+        
+        
+        
     }
     
     //MARK - Model Manipulation Methods
@@ -177,6 +208,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         do {
             try context.save()
+
         } catch {
             print("Error saving context: \(error)")
             
