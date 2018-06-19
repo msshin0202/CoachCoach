@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,11 +37,15 @@
                                         <rect key="frame" x="154" y="346" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="hND-9D-DaC" userLabel="GoalKeeperJersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="hND-9D-DaC" userLabel="GoalKeeperJersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="UVM-Nj-FrL" appends="YES" id="cFQ-sU-ohM"/>
+                                                </connections>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNH-pe-STU" userLabel="GoalKeeperName">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WNH-pe-STU" userLabel="GoalKeeperName">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -54,9 +58,13 @@
                                         <rect key="frame" x="22" y="266" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="DfA-39-UE6" userLabel="Player1Jersey">
+                                            <imageView tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="DfA-39-UE6" userLabel="Player1Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="JdZ-C4-g2S" appends="YES" id="gyl-Wp-jBp"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KNI-xc-xls" userLabel="Player1Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -71,9 +79,13 @@
                                         <rect key="frame" x="97" y="266" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="uXM-Li-Rko" userLabel="Player2Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="uXM-Li-Rko" userLabel="Player2Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Pn6-wt-zCP" appends="YES" id="rE9-UD-atE"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qjs-tS-gwK" userLabel="Player2Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -88,11 +100,15 @@
                                         <rect key="frame" x="210" y="266" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="FJF-3l-awk" userLabel="Player1Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="FJF-3l-awk" userLabel="Player3Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Uvd-af-Ye9" appends="YES" id="laC-Ob-Wex"/>
+                                                </connections>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWB-Dk-Bmd" userLabel="Player1Name">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWB-Dk-Bmd" userLabel="Player3Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -105,9 +121,13 @@
                                         <rect key="frame" x="285" y="266" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="nPJ-Bt-baM" userLabel="Player4Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="nPJ-Bt-baM" userLabel="Player4Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="6If-e8-LOl" appends="YES" id="22G-uM-cHk"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SPZ-MO-XVT" userLabel="Player4Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -122,9 +142,13 @@
                                         <rect key="frame" x="22" y="175" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="rgK-nn-nAF" userLabel="Player5Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="rgK-nn-nAF" userLabel="Player5Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="d0b-2X-RuB" appends="YES" id="zsm-uN-xOy"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55A-BB-dB1" userLabel="Player5Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -139,9 +163,13 @@
                                         <rect key="frame" x="97" y="175" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="Ay6-b5-V0l" userLabel="Player6Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="Ay6-b5-V0l" userLabel="Player6Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="xXW-u3-YnR" appends="YES" id="JdS-nZ-YKW"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oHP-el-8h6" userLabel="Player6Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -156,9 +184,13 @@
                                         <rect key="frame" x="210" y="175" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="SxS-v6-T2V" userLabel="Player7Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="SxS-v6-T2V" userLabel="Player7Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="3Wp-97-qK8" appends="YES" id="erJ-zc-gBM"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sd7-aV-Wz1" userLabel="Player7Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -173,9 +205,13 @@
                                         <rect key="frame" x="285" y="175" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="dom-Pk-8wK" userLabel="Player8Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="dom-Pk-8wK" userLabel="Player8Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="hlo-l9-ymP" appends="YES" id="H4Z-ni-BbN"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HqO-IO-ig0" userLabel="Player8Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -190,9 +226,13 @@
                                         <rect key="frame" x="97" y="95" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="tqA-za-Fz8" userLabel="Player9Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="tqA-za-Fz8" userLabel="Player9Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="CC5-cD-fpu" appends="YES" id="X1W-nQ-rKN"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsq-RY-CId" userLabel="Player9Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -207,9 +247,13 @@
                                         <rect key="frame" x="210" y="95" width="67" height="72"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="Umr-JK-wwt" userLabel="Player10Jersey">
+                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="whiteshirt" translatesAutoresizingMaskIntoConstraints="NO" id="Umr-JK-wwt" userLabel="Player10Jersey">
                                                 <rect key="frame" x="12" y="5" width="41" height="41"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <gestureRecognizers/>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="LAL-ik-Vbh" appends="YES" id="eiF-Dd-l3Y"/>
+                                                </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5T-J8-AHX" userLabel="Player10Name">
                                                 <rect key="frame" x="12" y="47" width="42" height="21"/>
@@ -297,8 +341,63 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="UVM-Nj-FrL" userLabel="GoalKeeper Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="goalKeeperTouchWithRecognizer:" destination="BYZ-38-t0r" id="n8d-6N-WW4"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="JdZ-C4-g2S" userLabel="Player1 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player1TouchWithRecognizer:" destination="BYZ-38-t0r" id="TPc-CL-zpG"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Pn6-wt-zCP" userLabel="Player2 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player2TouchWithRecognizer:" destination="BYZ-38-t0r" id="x75-9c-wcs"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Uvd-af-Ye9" userLabel="Player3 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player3TouchWithRecognizer:" destination="BYZ-38-t0r" id="0W7-VC-puy"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="6If-e8-LOl" userLabel="Player4 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player4TouchWithRecognizer:" destination="BYZ-38-t0r" id="ME4-0o-INg"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="d0b-2X-RuB" userLabel="Player5 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player5TouchWithRecognizer:" destination="BYZ-38-t0r" id="FCr-YC-jtz"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="xXW-u3-YnR" userLabel="Player6 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player6TouchWithRecognizer:" destination="BYZ-38-t0r" id="oB1-qj-tai"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="3Wp-97-qK8" userLabel="Player7 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player7TouchWithRecognizer:" destination="BYZ-38-t0r" id="mcK-mu-tGt"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="hlo-l9-ymP" userLabel="Player8 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player8TouchWithRecognizer:" destination="BYZ-38-t0r" id="g1B-g0-lrZ"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="CC5-cD-fpu" userLabel="Player9 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player9TouchWithRecognizer:" destination="BYZ-38-t0r" id="omW-kJ-FjM"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="LAL-ik-Vbh" userLabel="Player10 Tap Gesture Recognizer">
+                    <connections>
+                        <action selector="player10TouchWithRecognizer:" destination="BYZ-38-t0r" id="mpt-IP-Pk2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-762" y="-95"/>
+            <point key="canvasLocation" x="-762.39999999999998" y="-95.802098950524751"/>
         </scene>
     </scenes>
     <resources>
