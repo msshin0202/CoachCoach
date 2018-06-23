@@ -13,4 +13,9 @@ class Player: Object {
     @objc dynamic var name : String = ""
     @objc dynamic var number : Int = 0
     
+    @objc dynamic var onField : Bool = false
+    
+    // position -1 is player not assigned a position and position 0 is the goalkeeper.
+    @objc dynamic var position : Int = -1
+    
 }

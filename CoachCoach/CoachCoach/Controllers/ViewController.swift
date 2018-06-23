@@ -42,9 +42,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //MARK - Global variables
     
-    var selectedPlayer : String = ""
+    var selectedPlayer : Player?
     
     var playerNames : Results<Player>?
+    
+    var fieldPlayers : Results<Player>?
+    
     
     let realm = try! Realm()
     
@@ -64,7 +67,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         loadPlayers()
         
-
+    
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -95,8 +99,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedPlayer = (playerNames?[indexPath.row].name)!
-        
+        selectedPlayer = Player()
+        selectedPlayer?.name = (playerNames?[indexPath.row].name)!
         
         
     }
@@ -105,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func addPlayerButtonPressed(_ sender: Any) {
         
-        var textField = UITextField()
+        var nameTextField = UITextField()
         
         let alert = UIAlertController(title: "New Player", message: "Enter in the name of your player", preferredStyle: .alert)
         
@@ -113,7 +117,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let addAction = UIAlertAction(title: "Add", style: .default) { (okAction) in
             
             let newPlayer = Player()
-            newPlayer.name = textField.text!
+            newPlayer.name = nameTextField.text!
             self.save(player: newPlayer)
             
         }
@@ -124,8 +128,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         alert.addAction(cancelAction)
         alert.addTextField { (playerNameTextField) in
             playerNameTextField.placeholder = "John Smith"
-            textField = playerNameTextField
+            nameTextField = playerNameTextField
         }
+        
         
         present(alert, animated: true, completion: nil)
     }
@@ -133,29 +138,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func deletePlayerButtonPressed(_ sender: Any) {
         
-//
-//        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete \(selectedPlayer) from your team?" , preferredStyle: .alert)
-//
-//
-//        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
-//
-//            for player in 0...self.playerNames!.count-1 {
-//                if (self.playerNames![player].name == self.selectedPlayer){
-//                    self.realm.delete(player)
-//                    return
-//                }
-//            }
-//
-//        }
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//
-//        alert.addAction(deleteAction)
-//        alert.addAction(cancelAction)
-//
-//        present(alert, animated: true, completion: nil)
-//
-//
+
+        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete \(String(describing: selectedPlayer?.name)) from your team?" , preferredStyle: .alert)
+
+
+        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
+
+            self.deletePlayer(player: self.selectedPlayer!)
+
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+
+        present(alert, animated: true, completion: nil)
+
+
         
         
     }
@@ -173,6 +173,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         playerNameListTableView.reloadData()
     }
+    
+    func deletePlayer(player : Player){
+        do {
+            try realm.write {
+                realm.delete(player)
+            }
+        } catch {
+            print("Error trying to save context: \(error)")
+        }
+        
+        playerNameListTableView.reloadData()
+    }
 
     
     func loadPlayers(){
@@ -180,7 +192,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         playerNames = realm.objects(Player.self)
         playerNameListTableView.reloadData()
         
-    
+//        goalKeeperNameLabel.text = realm.object(ofType: Player.self, forPrimaryKey: goalKeeperNameLabel.text)?.name
+        
         
     }
     
@@ -191,9 +204,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         do{
             try realm.write {
-                
-                playerLabel.text = selectedPlayer
+            
+                playerLabel.text = selectedPlayer?.name
                 playerLabel.sizeToFit()
+                
+                let newFieldPlayer = Player()
+                newFieldPlayer.name = (selectedPlayer?.name)!
+                newFieldPlayer.onField = true
+                newFieldPlayer.position = playerLabel.tag
+                
+                realm.add(newFieldPlayer)
+
                 
             }
         } catch {
@@ -207,54 +228,53 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func player1Touch(recognizer:UITapGestureRecognizer){
-        player1NameLabel.text = selectedPlayer
-        player1NameLabel.sizeToFit()
+        storeFieldPlayer(playerLabel: player1NameLabel)
     }
-    
-    @IBAction func player2Touch(recognizer:UITapGestureRecognizer){
-        player2NameLabel.text = selectedPlayer
-        player2NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player3Touch(recognizer:UITapGestureRecognizer){
-        player3NameLabel.text = selectedPlayer
-        player3NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player4Touch(recognizer:UITapGestureRecognizer){
-        player4NameLabel.text = selectedPlayer
-        player4NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player5Touch(recognizer:UITapGestureRecognizer){
-        player5NameLabel.text = selectedPlayer
-        player5NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player6Touch(recognizer:UITapGestureRecognizer){
-        player6NameLabel.text = selectedPlayer
-        player6NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player7Touch(recognizer:UITapGestureRecognizer){
-        player7NameLabel.text = selectedPlayer
-        player7NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player8Touch(recognizer:UITapGestureRecognizer){
-        player8NameLabel.text = selectedPlayer
-        player8NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player9Touch(recognizer:UITapGestureRecognizer){
-        player9NameLabel.text = selectedPlayer
-        player9NameLabel.sizeToFit()
-    }
-    
-    @IBAction func player10Touch(recognizer:UITapGestureRecognizer){
-        player10NameLabel.text = selectedPlayer
-        player10NameLabel.sizeToFit()
-    }
+//
+//    @IBAction func player2Touch(recognizer:UITapGestureRecognizer){
+//        player2NameLabel.text = selectedPlayer
+//        player2NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player3Touch(recognizer:UITapGestureRecognizer){
+//        player3NameLabel.text = selectedPlayer
+//        player3NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player4Touch(recognizer:UITapGestureRecognizer){
+//        player4NameLabel.text = selectedPlayer
+//        player4NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player5Touch(recognizer:UITapGestureRecognizer){
+//        player5NameLabel.text = selectedPlayer
+//        player5NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player6Touch(recognizer:UITapGestureRecognizer){
+//        player6NameLabel.text = selectedPlayer
+//        player6NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player7Touch(recognizer:UITapGestureRecognizer){
+//        player7NameLabel.text = selectedPlayer
+//        player7NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player8Touch(recognizer:UITapGestureRecognizer){
+//        player8NameLabel.text = selectedPlayer
+//        player8NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player9Touch(recognizer:UITapGestureRecognizer){
+//        player9NameLabel.text = selectedPlayer
+//        player9NameLabel.sizeToFit()
+//    }
+//
+//    @IBAction func player10Touch(recognizer:UITapGestureRecognizer){
+//        player10NameLabel.text = selectedPlayer
+//        player10NameLabel.sizeToFit()
+//    }
     
     
 
