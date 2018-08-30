@@ -15,7 +15,11 @@ class Player: Object {
     
     @objc dynamic var onField : Bool = false
     
-    // position -1 is player not assigned a position and position 0 is the goalkeeper.
+    // position -1 is a player not assigned a position and position 0 is the goalkeeper.
     @objc dynamic var position : Int = -1
+    
+    override static func primaryKey() -> String? {
+        return "name"
+    }
     
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
+import ChameleonFramework
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
@@ -67,6 +69,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         loadPlayers()
         
+        playerNameListTableView.rowHeight = 88
+        
     
         
     }
@@ -84,7 +88,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerNameCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerNameCell", for: indexPath) as! SwipeTableViewCell
+        
+        cell.delegate = self
+        
         if let player = playerNames?[indexPath.row] {
             cell.textLabel?.text = player.name
         } else {
@@ -99,8 +106,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedPlayer = Player()
-        selectedPlayer?.name = (playerNames?[indexPath.row].name)!
+        selectedPlayer = realm.object(ofType: Player.self, forPrimaryKey: (playerNames?[indexPath.row].name)!)
+//        selectedPlayer?.name = (playerNames?[indexPath.row].name)!
         
         
     }
@@ -136,30 +143,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    @IBAction func deletePlayerButtonPressed(_ sender: Any) {
-        
-
-        let alert = UIAlertController(title: "Delete Player", message: "Are you sure you want to delete \(String(describing: selectedPlayer?.name)) from your team?" , preferredStyle: .alert)
-
-
-        let deleteAction = UIAlertAction(title: "Delete", style: .default) { (deleteAction) in
-
-            self.deletePlayer(player: self.selectedPlayer!)
-
-        }
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
-        alert.addAction(deleteAction)
-        alert.addAction(cancelAction)
-
-        present(alert, animated: true, completion: nil)
-
-
-        
-        
-    }
-    
     //MARK - Model Manipulation Methods
     
     func save(player : Player){
@@ -173,24 +156,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         playerNameListTableView.reloadData()
     }
-    
-    func deletePlayer(player : Player){
-        do {
-            try realm.write {
-                realm.delete(player)
-            }
-        } catch {
-            print("Error trying to save context: \(error)")
-        }
-        
-        playerNameListTableView.reloadData()
-    }
 
     
     func loadPlayers(){
         
         playerNames = realm.objects(Player.self)
         playerNameListTableView.reloadData()
+        
+
+        for player in playerNames! {
+            if player.onField == true {
+                switch player.position {
+                case 0:
+                    goalKeeperNameLabel.text = player.name
+                    goalKeeperNameLabel.sizeToFit()
+                case 1:
+                    player1NameLabel.text = player.name
+                    player1NameLabel.sizeToFit()
+                case 2:
+                    player2NameLabel.text = player.name
+                    player2NameLabel.sizeToFit()
+                case 3:
+                    player3NameLabel.text = player.name
+                    player3NameLabel.sizeToFit()
+                case 4:
+                    player4NameLabel.text = player.name
+                    player4NameLabel.sizeToFit()
+                case 5:
+                    player5NameLabel.text = player.name
+                    player5NameLabel.sizeToFit()
+                case 6:
+                    player6NameLabel.text = player.name
+                    player6NameLabel.sizeToFit()
+                case 7:
+                    player7NameLabel.text = player.name
+                    player7NameLabel.sizeToFit()
+                case 8:
+                    player8NameLabel.text = player.name
+                    player8NameLabel.sizeToFit()
+                case 9:
+                    player9NameLabel.text = player.name
+                    player9NameLabel.sizeToFit()
+                case 10:
+                    player10NameLabel.text = player.name
+                    player10NameLabel.sizeToFit()
+                default:
+                    print("Error loading field players")
+                    return
+                }
+            }
+        }
+        
         
 //        goalKeeperNameLabel.text = realm.object(ofType: Player.self, forPrimaryKey: goalKeeperNameLabel.text)?.name
         
@@ -207,19 +223,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
                 playerLabel.text = selectedPlayer?.name
                 playerLabel.sizeToFit()
-                
-                let newFieldPlayer = Player()
-                newFieldPlayer.name = (selectedPlayer?.name)!
-                newFieldPlayer.onField = true
-                newFieldPlayer.position = playerLabel.tag
-                
-                realm.add(newFieldPlayer)
+        
+                let currPlayer = realm.object(ofType: Player.self, forPrimaryKey: playerLabel.text)
+                currPlayer?.position = playerLabel.tag
+                currPlayer?.onField = true
 
                 
             }
         } catch {
             print("Error trying to save context: \(error)")
         }
+        
+    }
+    
+    func updatePlayer() {
         
     }
     
@@ -230,53 +247,83 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBAction func player1Touch(recognizer:UITapGestureRecognizer){
         storeFieldPlayer(playerLabel: player1NameLabel)
     }
-//
-//    @IBAction func player2Touch(recognizer:UITapGestureRecognizer){
-//        player2NameLabel.text = selectedPlayer
-//        player2NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player3Touch(recognizer:UITapGestureRecognizer){
-//        player3NameLabel.text = selectedPlayer
-//        player3NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player4Touch(recognizer:UITapGestureRecognizer){
-//        player4NameLabel.text = selectedPlayer
-//        player4NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player5Touch(recognizer:UITapGestureRecognizer){
-//        player5NameLabel.text = selectedPlayer
-//        player5NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player6Touch(recognizer:UITapGestureRecognizer){
-//        player6NameLabel.text = selectedPlayer
-//        player6NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player7Touch(recognizer:UITapGestureRecognizer){
-//        player7NameLabel.text = selectedPlayer
-//        player7NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player8Touch(recognizer:UITapGestureRecognizer){
-//        player8NameLabel.text = selectedPlayer
-//        player8NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player9Touch(recognizer:UITapGestureRecognizer){
-//        player9NameLabel.text = selectedPlayer
-//        player9NameLabel.sizeToFit()
-//    }
-//
-//    @IBAction func player10Touch(recognizer:UITapGestureRecognizer){
-//        player10NameLabel.text = selectedPlayer
-//        player10NameLabel.sizeToFit()
-//    }
+
+    @IBAction func player2Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player2NameLabel)
+    }
+
+    @IBAction func player3Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player3NameLabel)
+    }
+
+    @IBAction func player4Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player4NameLabel)
+    }
+
+    @IBAction func player5Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player5NameLabel)
+    }
+
+    @IBAction func player6Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player6NameLabel)
+    }
+
+    @IBAction func player7Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player7NameLabel)
+    }
+
+    @IBAction func player8Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player8NameLabel)
+    }
+
+    @IBAction func player9Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player9NameLabel)
+    }
+
+    @IBAction func player10Touch(recognizer:UITapGestureRecognizer){
+        storeFieldPlayer(playerLabel: player10NameLabel)
+    }
     
     
 
+}
+
+//MARK: - Swipe Cell Delegate Methods
+
+extension ViewController : SwipeTableViewCellDelegate {
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { action, indexPath in
+            // handle action by updating model with deletion
+            
+            if let playerForDeletion = self.playerNames?[indexPath.row]{
+                
+                do {
+                    try self.realm.write {
+                        self.realm.delete(playerForDeletion)
+                    }
+                } catch {
+                    print("Error deleting player: \(error)")
+                }
+            }
+        }
+        
+        // customize the action appearance
+        deleteAction.image = UIImage(named: "delete-icon")
+        
+        return [deleteAction]
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        var options = SwipeTableOptions()
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
+        
+        
+    }
 }
 
